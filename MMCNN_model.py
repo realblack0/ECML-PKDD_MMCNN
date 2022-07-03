@@ -16,9 +16,9 @@ from keras import regularizers
 from keras.layers import BatchNormalization
 from keras import metrics
 from keras import losses
-from keras.utils import to_categorical
+from tensorflow.keras.utils import to_categorical
 from tensorflow.keras.callbacks import EarlyStopping
-from keras.layers import merge
+from tensorflow.keras.layers import merge
 from sklearn.metrics import confusion_matrix
 from sklearn.metrics import f1_score
 from keras import optimizers
