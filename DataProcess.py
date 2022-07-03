@@ -59,16 +59,16 @@ class DataProcess():
         # data = data.swapaxes(1,2)
 
         # Shuffle
-        index_k = [i for i in range(len(data))] 
+        index_k = [i for i in range(len(train_data))] 
         random.shuffle(index_k)
-        self.train_data = data[index_k]
-        self.train_label = label[index_k]
+        self.train_data = train_data[index_k]
+        self.train_label = train_label[index_k]
         print("train")
         print(self.train_data.shape)
         print(self.train_label.shape)
         
-        self.validation_data = data
-        self.validation_label = label
+        self.validation_data = validation_data
+        self.validation_label = validation_label
         print("validation")
         print(self.train_data.shape)
         print(self.train_label.shape)
