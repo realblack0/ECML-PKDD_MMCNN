@@ -98,8 +98,9 @@ def main():
 																interval = window_test_interval)
 	validation_data = data_aug_validation
 	validation_label = label_aug_validation
-	print(validation_data.shape,"\n",validation_label.shape)
-	print(train_data.shape,"\n",train_label.shape)
+	print("augmentation")
+	print("train\n",train_data.shape,"\n",train_label.shape)
+	print("validation\n",validation_data.shape,"\n",validation_label.shape)
 
 	MMCNN = MMCNN_model(channels = 3,samples = 1000)
 	model = MMCNN.model
