@@ -56,9 +56,9 @@ class MMCNN_model():
         
         self.model = self.build_model(self.channels,self.samples)
         adam = optimizers.Adam(lr = self.learning_rate) 
-        self.model.compile(loss=losses.binary_crossentropy,
+        self.model.compile(loss=losses.categorical_crossentropy,
                            optimizer = adam,
-                           metrics=['mae',metrics.binary_accuracy])
+                           metrics=['mae',metrics.categorical_accuracy])
             
     def build_model(self,channels,samples):
         output_conns = []
@@ -204,8 +204,8 @@ class MMCNN_model():
 
         output_conns = layers.Concatenate(axis = -1)(output_conns)
         output_conns = layers.core.Dropout(self.dropout)(output_conns)
-        output_tensor = layers.Dense(2,activation = 'sigmoid')(output_conns)
-    #     output_tensor = layers.Dense(4,activation = 'softmax')(output_conns)
+        # output_tensor = layers.Dense(2,activation = 'sigmoid')(output_conns)
+        output_tensor = layers.Dense(4,activation = 'softmax')(output_conns)
         model = Model(input_tensor,output_tensor)
         return model
         
