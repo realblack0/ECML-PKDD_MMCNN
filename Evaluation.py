@@ -20,7 +20,7 @@ class Evaluations():
         self.validation_score = validation_score
         
         self.matrix,self.kappa = self.matrix_and_kappa(self.y_pred,self.y_true)
-        self.f1 = self.f1_score(self.y_pred,self.y_true)
+        # self.f1 = self.f1_score(self.y_pred,self.y_true)
         
     # Matrix confusion and the kappa value
     def matrix_and_kappa(self,y_pred,y_true):
