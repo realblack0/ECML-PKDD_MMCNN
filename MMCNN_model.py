@@ -45,7 +45,7 @@ class MMCNN_model():
         self.first_maxpooling_size = 4
         self.first_maxpooling_stride = 4
 		# the parameter of the second part :Residual block       
-		self.res_block_filters = [16,16,16]
+	self.res_block_filters = [16,16,16]
         self.res_block_kernel_stride = [8,7,7,7,6]
 		# the parameter of the third part :SE block
         self.se_block_kernel_stride = 16
