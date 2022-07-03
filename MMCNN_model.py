@@ -204,8 +204,8 @@ class MMCNN_model():
 
         output_conns = layers.Concatenate(axis = -1)(output_conns)
         output_conns = layers.core.Dropout(self.dropout)(output_conns)
-        output_tensor = layers.Dense(2,activation = 'sigmoid')(output_conns)
-    #     output_tensor = layers.Dense(4,activation = 'softmax')(output_conns)
+        # output_tensor = layers.Dense(2,activation = 'sigmoid')(output_conns)
+        output_tensor = layers.Dense(4,activation = 'softmax')(output_conns)
         model = Model(input_tensor,output_tensor)
         return model
         
