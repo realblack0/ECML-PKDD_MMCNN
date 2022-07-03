@@ -1,3 +1,8 @@
+import numpy as np
+import matplotlib.pyplot as plt
+from sklearn.metrics import confusion_matrix
+from sklearn.metrics import cohen_kappa_score
+
 class Evaluations():
     def __init__ (self,
                    history,
