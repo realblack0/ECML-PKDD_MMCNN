@@ -18,10 +18,10 @@ from keras import metrics
 from keras import losses
 from tensorflow.keras.utils import to_categorical
 from tensorflow.keras.callbacks import EarlyStopping
-from tensorflow.keras.layers import merge
+from keras.layers import merge
 from sklearn.metrics import confusion_matrix
 from sklearn.metrics import f1_score
-from keras import optimizers
+from tensorflow.keras import optimizers
 
 class MMCNN_model():
     
