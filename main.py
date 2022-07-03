@@ -1,6 +1,6 @@
 import argparse
 from DataProcess import *
-from Evaluations import *
+from Evaluation import *
 from MMCNN_model import *
 
 def main():
