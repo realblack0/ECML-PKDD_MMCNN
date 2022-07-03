@@ -56,9 +56,9 @@ class MMCNN_model():
         
         self.model = self.build_model(self.channels,self.samples)
         adam = optimizers.Adam(lr = self.learning_rate) 
-        self.model.compile(loss=losses.binary_crossentropy,
+        self.model.compile(loss=losses.categorical_crossentropy,
                            optimizer = adam,
-                           metrics=['mae',metrics.binary_accuracy])
+                           metrics=['mae',metrics.categorical_accuracy])
             
     def build_model(self,channels,samples):
         output_conns = []
