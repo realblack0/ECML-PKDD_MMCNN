@@ -242,7 +242,7 @@ class DataProcess():
     '''
     def load_npy_for_2a(self,raw_gdfs,file_path,choose2aclasses):
         assert len(raw_gdfs) == 2
-        for raw_gdf in raw_gdfs):
+        for raw_gdf in raw_gdfs:
             data_path = self.data_path + raw_gdf + "_data.npy"
             label_path = self.data_path + raw_gdf + "_label.npy"
             if raw_gdf.endswith("T"):
