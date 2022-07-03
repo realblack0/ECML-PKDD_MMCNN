@@ -18,16 +18,17 @@ def main():
 						type = str,
 						default = '2a',
 						help = 'choose 2a:input 2a,choose 2b:input 2b')
+	parser.add_argument('--choosesubject',
+				   type = str,
+				   default = '1',
+				   help = 'subject id')
 						
 	args = parser.parse_args()
 
 	
 	data_2a_path = args.get2apath
-	data_2a_files = ["A01T","A01E","A02T","A02E",
-					 "A03T","A03E","A04T","A04E",
-					 "A05T","A05E","A06T","A06E",
-					 "A07T","A07E","A08T","A08E",
-					 "A09T","A09E"]
+	data_2a_files = ["A0{}T".format(args.choosesubject),"A0{}E".format(args.choosesubject)]
+	
 	data_2b_path = args.get2bpath
 	data_2b_files = ["B0101T","B0102T","B0103T","B0104E","B0105E",
 					 "B0201T","B0202T","B0203T","B0204E","B0205E",
