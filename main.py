@@ -73,8 +73,8 @@ def main():
 		train_label = np.concatenate((label[:num_validation_samples * fold],label[num_validation_samples*(fold + 1):]),
 									 axis=0)
 		# normalization
-		data_mean = data.mean(axis=0)
-		data_std  = data.std(axis=0)
+		data_mean = train_data.mean(axis=0)
+		data_std  = train_data.std(axis=0)
 		
 		validation_data -= data_mean
 		validation_data /= data_std
