@@ -41,28 +41,37 @@ class DataProcess():
             '''
             choose dataset 2a
             '''
-            data, label = self.load_npy_for_2a(self.data_files,self.data_path,choose2aclasses)
-            data = self.interpolate_data(data,orig = 1000,porlong = 1050,kind = "cubic")
+            train_data, train_label, validation_data, validation_label = self.load_npy_for_2a(self.data_files,self.data_path,choose2aclasses)
+            train_data = self.interpolate_data(train_data,orig = 1000,porlong = 1050,kind = "cubic")
+            validation_data = self.interpolate_data(validation_data,orig = 1000,porlong = 1050,kind = "cubic")
 
         elif choose2aor2b == 2:
             '''
             choose dataset 2b
             '''
             data,label = self.load_npy_for_2b(self.data_files,self.data_path)
-            
-        # Normalized
-        data = data.swapaxes(1,2)
-        data -= data.mean(axis=0)
-        data /= data.std(axis=0)
-        data = data.swapaxes(1,2)
+          
+        # Already processed in load_npy_for_2a
+        # # Normalized
+        # data = data.swapaxes(1,2)
+        # data -= data.mean(axis=0)
+        # data /= data.std(axis=0)
+        # data = data.swapaxes(1,2)
 
         # Shuffle
         index_k = [i for i in range(len(data))] 
         random.shuffle(index_k)
-        self.data = data[index_k]
-        self.label = label[index_k]
-        print(self.data.shape)
-        print(self.label.shape)
+        self.train_data = data[index_k]
+        self.train_label = label[index_k]
+        print("train")
+        print(self.train_data.shape)
+        print(self.train_label.shape)
+        
+        self.validation_data = data
+        self.validation_label = label
+        print("validation")
+        print(self.train_data.shape)
+        print(self.train_label.shape)
                 
     '''
     Sliding window data augmentation
@@ -231,29 +240,33 @@ class DataProcess():
     '''
     load 2a dataset
     '''
-    def load_npy_for_2a(self,raw_gdf,file_path,choose2aclasses):
-        data = []
-        label = []
-        for i in range(len(raw_gdf)):
-            data_path = self.data_path + raw_gdf[i] + "_data.npy"
-            label_path = self.data_path + raw_gdf[i] + "_label.npy"
-            if i == 0:
+    def load_npy_for_2a(self,raw_gdfs,file_path,choose2aclasses):
+        assert len(raw_gdfs) == 2
+        for raw_gdf in raw_gdfs):
+            data_path = self.data_path + raw_gdf + "_data.npy"
+            label_path = self.data_path + raw_gdf + "_label.npy"
+            if raw_gdf.endswith("T"):
                 data = np.load(data_path)
                 data = data.swapaxes(0,1)
                 data = data.swapaxes(1,2)
                 label = np.load(label_path)
-            else:
+            elif raw_gdf.endswith("E"):
                 data_t = np.load(data_path)
                 data_t = data_t.swapaxes(0,1)
                 data_t = data_t.swapaxes(1,2)
                 label_t = np.load(label_path)
-                data = np.concatenate((data,data_t),axis = 0)
-                label = np.concatenate((label,label_t),axis = 0)
             print(data_path[-13:-9],"load success.")
-        data,label = self.choose_2a_class(data,label,choose2aclasses)
+        # data,label = self.choose_2a_class(data,label,choose2aclasses)
 
-        data -= data.mean(axis=0)
-        data /= data.std(axis=0)
+        data_mean = data.mean(axis=0)
+        data_std = data.std(axis=0)
+        
+        data -= data_mean
+        data /= data_std
+        
+        data_t -= data_mean
+        data_t /= data_std
+        
         # one-hot 
         one_hot_label = array(label)
         label_encoder = LabelEncoder()
@@ -262,4 +275,15 @@ class DataProcess():
         integer_encoded = integer_encoded.reshape(len(integer_encoded),1)
         onehot_encoded = onehot_encoder.fit_transform(integer_encoded)
         label = np.array(onehot_encoded)
-        return data,label
+        
+        one_hot_label = array(label_t)
+        label_encoder = LabelEncoder()
+        integer_encoded = label_encoder.fit_transform(one_hot_label)
+        onehot_encoder = OneHotEncoder(sparse = False)
+        integer_encoded = integer_encoded.reshape(len(integer_encoded),1)
+        onehot_encoded = onehot_encoder.fit_transform(integer_encoded)
+        label_t = np.array(onehot_encoded)
+
+        train_data,train_label,validation_data,validataion_label = data, label, data_t, label_t
+        
+        return train_data,train_label,validation_data,validataion_label
