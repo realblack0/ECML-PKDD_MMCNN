@@ -50,11 +50,11 @@ class DataProcess():
             '''
             data,label = self.load_npy_for_2b(self.data_files,self.data_path)
             
-        # Normalized
-        data = data.swapaxes(1,2)
-        data -= data.mean(axis=0)
-        data /= data.std(axis=0)
-        data = data.swapaxes(1,2)
+        # # Normalized
+        # data = data.swapaxes(1,2)
+        # data -= data.mean(axis=0)
+        # data /= data.std(axis=0)
+        # data = data.swapaxes(1,2)
 
         # Shuffle
         index_k = [i for i in range(len(data))] 
@@ -252,8 +252,8 @@ class DataProcess():
             print(data_path[-13:-9],"load success.")
         data,label = self.choose_2a_class(data,label,choose2aclasses)
 
-        data -= data.mean(axis=0)
-        data /= data.std(axis=0)
+        # data -= data.mean(axis=0)
+        # data /= data.std(axis=0)
         # one-hot 
         one_hot_label = array(label)
         label_encoder = LabelEncoder()
