@@ -51,13 +51,21 @@ class DataProcess():
             '''
             data,label = self.load_npy_for_2b(self.data_files,self.data_path)
           
-        # Already processed in load_npy_for_2a
-        # # Normalized
-        # data = data.swapaxes(1,2)
-        # data -= data.mean(axis=0)
-        # data /= data.std(axis=0)
-        # data = data.swapaxes(1,2)
-
+        # Normalized
+        train_data = train_data.swapaxes(1,2)
+        validation_data = validation_data.swapaxes(1,2)
+        
+        data_mean = train_data.mean(axis=0)
+        data_std = train_data.std(axis=0)
+        
+        train_data -= data_mean
+        train_data /= data_std
+        validation_data -= data_mean
+        validation_data /= data_std
+        
+        train_data = train_data.swapaxes(1,2)
+        validation_data = validation_data.swapaxes(1,2)
+        
         # Shuffle
         index_k = [i for i in range(len(train_data))] 
         random.shuffle(index_k)
