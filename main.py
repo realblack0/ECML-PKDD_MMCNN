@@ -22,6 +22,10 @@ def main():
 				   type = str,
 				   default = '1',
 				   help = 'subject id')
+	parser.add_argument('--choose2aclasses',
+			    	   type = str,
+			    	   default = '2',
+			           help = 'choose 1:all 4 classes, choose 2: left hand and right hand, choose 3: foot and tongue')
 						
 	args = parser.parse_args()
 
@@ -41,7 +45,7 @@ def main():
 					 "B0901T","B0902T","B0903T","B0904E","B0905E"]
 	if args.choosedata == '2a':
 		choose2aor2b = 1
-		choose2aclasses = 1 # for 4 classes
+		choose2aclasses = args.choose2aclasses
 		GetData = DataProcess(data_2a_path,data_2a_files,choose2aor2b,choose2aclasses)		
 	elif args.choosedata == '2b':
 		choose2aor2b = 2
