@@ -66,7 +66,7 @@ def main():
 	histories = []        # history
 	matrixes = []         # Confusion matrix
 	kappas = []           # kappa 
-	# f1_scores = []        # f1 scores
+	f1_scores = []        # f1 scores
 	loss_scores = []           # loss
 	errors = []           # errors
 	for fold in range(k):
@@ -132,18 +132,18 @@ def main():
 		histories.append(Result.history)
 		matrixes.append(Result.matrix)
 		kappas.append(Result.kappa)
-		# f1_scores.append(Result.f1)
+		f1_scores.append(Result.f1)
 		validation_scores.append(Result.validation_score)
 		loss_scores.append(Result.loss_score)
 		errors.append(Result.error)
 	ave_val_score = np.average(validation_scores)
-	# ave_f1 = np.average(f1_scores)
+	ave_f1 = np.average(f1_scores)
 	ave_kappa = np.average(kappas)
 	ave_loss = np.average(loss_scores)
 	ave_error = np.average(errors)
 
 	print("the average validation score:",ave_val_score)
-	# print("the average f1 score:",ave_f1)
+	print("the average f1 score:",ave_f1)
 	print("the average kappa:",ave_kappa)
 	print("the average loss:",ave_loss)
 	print("the average error:",ave_error)
