@@ -78,8 +78,8 @@ class DataProcess():
         self.validation_data = validation_data
         self.validation_label = validation_label
         print("validation")
-        print(self.train_data.shape)
-        print(self.train_label.shape)
+        print(self.validation_data.shape)
+        print(self.validation_label.shape)
                 
     '''
     Sliding window data augmentation
